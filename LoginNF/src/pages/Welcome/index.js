@@ -8,18 +8,19 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-  Keyboard
+  Keyboard,
 } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Welcome() {
-    const [keyboardVisible, setKeyboardVisible] = useState(false);
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+  const navigation = useNavigation();
 
-
-    return (
+  return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -55,14 +56,15 @@ export default function Welcome() {
             onFocus={() => setKeyboardVisible(true)}
             onBlur={() => setKeyboardVisible(false)}
           />
-         
 
-         {!keyboardVisible && (
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Acessar</Text>
-          </TouchableOpacity>
-         )}
-
+          {!keyboardVisible && (
+            <TouchableOpacity 
+            style={styles.button}
+            onPress={() => navigation.navigate('SignIn')}
+            >
+              <Text style={styles.buttonText}>Vamos lá!</Text>
+            </TouchableOpacity>
+          )}
         </Animatable.View>
       </LinearGradient>
     </KeyboardAvoidingView>
@@ -113,6 +115,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     color: "#fff",
+    fontWeight: "bold",
   },
   input: {
     height: 60,
