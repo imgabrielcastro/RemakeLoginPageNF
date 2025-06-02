@@ -13,7 +13,7 @@
       "sexo": "Masculino",
       "email": "joao.silva@email.com",
       "telefone": "(11) 98765-4321",
-      "cpf": "123.456.789-00"
+      "cpf": "12345678900"
     },
     {
       "cep": "98765-432",
@@ -28,7 +28,7 @@
       "sexo": "Feminino",
       "email": "maria.souza@email.com",
       "telefone": "(21) 99876-5432",
-      "cpf": "987.654.321-00"
+      "cpf": "98765432100"
     },
     {
       "cep": "11223-445",
@@ -43,7 +43,7 @@
       "sexo": "Masculino",
       "email": "carlos.lima@email.com",
       "telefone": "(31) 98876-5432",
-      "cpf": "456.789.123-00"
+      "cpf": "45678912300"
     },
     {
       "cep": "22111-223",
@@ -58,7 +58,7 @@
       "sexo": "Feminino",
       "email": "ana.costa@email.com",
       "telefone": "(21) 99765-4321",
-      "cpf": "321.654.987-00"
+      "cpf": "32165498700"
     },
     {
       "cep": "33445-556",
@@ -73,7 +73,7 @@
       "sexo": "Masculino",
       "email": "felipe.lima@email.com",
       "telefone": "(41) 99887-6543",
-      "cpf": "654.321.987-00"
+      "cpf": "65432198700"
     }
   ]
 }

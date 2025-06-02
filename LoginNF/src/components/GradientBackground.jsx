@@ -10,8 +10,10 @@ const GradientBackGround = ({ children, style }) =>{
       end={{ x: 1, y: 1 }}
       style={styles.container}
     >
-      { children }
+
+      {children}
     </LinearGradient>
+    
   );
 };
 const styles = StyleSheet.create({
