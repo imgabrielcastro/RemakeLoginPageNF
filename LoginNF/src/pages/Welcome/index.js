@@ -15,9 +15,25 @@ import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
+const mockData = require("../../data/mockData.json");
+
 
 export default function Welcome() {
   const [keyboardVisible, setKeyboardVisible] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
+  const handleSubmit = () => {
+    const user = mockData.usuarios.find(
+      (user) => user.cpf === inputValue || user.email === inputValue
+    );
+
+    if (user) {
+      
+    } else {
+      navigation.navigate("SignIn");;
+    }
+  };
+
   const navigation = useNavigation();
 
   return (
@@ -55,12 +71,13 @@ export default function Welcome() {
             keyboardType="default"
             onFocus={() => setKeyboardVisible(true)}
             onBlur={() => setKeyboardVisible(false)}
+            onChangeText={setInputValue}
           />
 
           {!keyboardVisible && (
-            <TouchableOpacity 
-            style={styles.button}
-            onPress={() => navigation.navigate('SignIn')}
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handleSubmit}
             >
               <Text style={styles.buttonText}>Vamos lá!</Text>
             </TouchableOpacity>

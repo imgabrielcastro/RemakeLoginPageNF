@@ -1,0 +1,79 @@
+{
+  "usuarios": [
+    {
+      "cep": "12345-678",
+      "endereco": "Rua das Flores",
+      "numero": "123",
+      "bairro": "Jardim das Acácias",
+      "complemento": "Apto 201",
+      "cidade": "São Paulo",
+      "local": "SP",
+      "nome_completo": "João da Silva",
+      "data_nascimento": "1985-05-15",
+      "sexo": "Masculino",
+      "email": "joao.silva@email.com",
+      "telefone": "(11) 98765-4321",
+      "cpf": "123.456.789-00"
+    },
+    {
+      "cep": "98765-432",
+      "endereco": "Avenida Brasil",
+      "numero": "456",
+      "bairro": "Centro",
+      "complemento": "Bloco B, Sala 45",
+      "cidade": "Rio de Janeiro",
+      "local": "RJ",
+      "nome_completo": "Maria Oliveira Souza",
+      "data_nascimento": "1990-10-22",
+      "sexo": "Feminino",
+      "email": "maria.souza@email.com",
+      "telefone": "(21) 99876-5432",
+      "cpf": "987.654.321-00"
+    },
+    {
+      "cep": "11223-445",
+      "endereco": "Rua das Palmeiras",
+      "numero": "789",
+      "bairro": "Vila Verde",
+      "complemento": "Casa 3",
+      "cidade": "Belo Horizonte",
+      "local": "MG",
+      "nome_completo": "Carlos Pereira Lima",
+      "data_nascimento": "1995-02-10",
+      "sexo": "Masculino",
+      "email": "carlos.lima@email.com",
+      "telefone": "(31) 98876-5432",
+      "cpf": "456.789.123-00"
+    },
+    {
+      "cep": "22111-223",
+      "endereco": "Rua Rio de Janeiro",
+      "numero": "1001",
+      "bairro": "Barra da Tijuca",
+      "complemento": "Casa 2",
+      "cidade": "Rio de Janeiro",
+      "local": "RJ",
+      "nome_completo": "Ana Beatriz Costa",
+      "data_nascimento": "1988-12-05",
+      "sexo": "Feminino",
+      "email": "ana.costa@email.com",
+      "telefone": "(21) 99765-4321",
+      "cpf": "321.654.987-00"
+    },
+    {
+      "cep": "33445-556",
+      "endereco": "Rua dos Lírios",
+      "numero": "222",
+      "bairro": "Centro",
+      "complemento": "Apto 303",
+      "cidade": "Curitiba",
+      "local": "PR",
+      "nome_completo": "Felipe Augusto Lima",
+      "data_nascimento": "1982-09-15",
+      "sexo": "Masculino",
+      "email": "felipe.lima@email.com",
+      "telefone": "(41) 99887-6543",
+      "cpf": "654.321.987-00"
+    }
+  ]
+}
