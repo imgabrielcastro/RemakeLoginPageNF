@@ -1,49 +1,74 @@
 import React, { useState } from "react";
-import GradientBackGround from "../../components/GradientBackground";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native"; // Importação do TouchableOpacity
+import { Text } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native"; // Importação do useNavigation
 import MyTextInput from "../../components/InputTemplate";
-import LogoScreen from "../../components/LogoScreen";
+import VStack from "../../components/Stacks/VStack";
+import { SafeAreaView } from "react-native-safe-area-context";
+import CustomStatusBar from "../../components/StatusBar";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
-export default function Welcome() {
+const CustomBackButton = () => {
+  const navigation = useNavigation();
+
+  const handleBackPress = () => {
+    navigation.navigate("Welcome");
+  };
+
+  return (
+    <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
+      <Icon name="chevron-left" size={30} color="black"/>
+    </TouchableOpacity>
+  );
+};
+
+export default function CadastroDados() {
   const [name, setName] = useState("");
   const [cep, setCep] = useState("");
   const [phone, setPhone] = useState("");
 
   return (
-    <GradientBackGround>
-      <LogoScreen></LogoScreen>
-      <View style={styles.container}>
-        <MyTextInput
-          label="Nome Completo"
-          value={name}
-          onChangeText={setName}
-          icon="account-circle"
-        ></MyTextInput>
-        <MyTextInput
-          label="CEP"
-          value={cep}
-          onChangeText={setCep}
-        ></MyTextInput>
-        <MyTextInput
-          label="Telefone"
-          value={phone}
-          onChangeText={setPhone}
-          keyboardType="phone-pad"
-          icon="phone"
-        ></MyTextInput>
-        <MyTextInput></MyTextInput>
-        <MyTextInput></MyTextInput>
-        <MyTextInput></MyTextInput>
-      </View>
-    </GradientBackGround>
+    <>
+      <CustomStatusBar backgroundColor="#83239F" barStyle="light-content" />
+      <SafeAreaView style={styles.container}>
+        <CustomBackButton />
+        <VStack style={{padding: 16 }}>
+          <VStack>
+            <View style={styles.contain}>
+              <Text variant="headlineMedium" style={styles.title}>
+                Preencha os dados para criar a sua conta.
+              </Text>
+              <MyTextInput
+                label="Nome Completo"
+                value={name}
+                onChangeText={setName}
+                icon="account-circle"
+              />
+
+               <MyTextInput
+                label="Telefone"
+                value={phone}
+                onChangeText={setPhone}
+                icon="phone"
+              />
+            </View>
+          </VStack>
+        </VStack>
+      </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 30,
-    justifyContent: "flex-start",
-    marginTop: 0,
+    backgroundColor: '#fafafa',
+  },
+  title: {
+    color: "#000",
+  },
+  backButton: {
+    left: 10,
+    zIndex: 1,
   },
 });

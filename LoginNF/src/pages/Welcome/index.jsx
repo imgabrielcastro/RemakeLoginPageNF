@@ -6,12 +6,15 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
+  StatusBar
 } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import BackgroundGradient from "../../components/GradientBackground";
+
 
 const mockData = require("../../data/mockData.json");
 
@@ -33,17 +36,15 @@ export default function Welcome() {
 
   const navigation = useNavigation();
 
+  <StatusBar backgroundColor="red" />
+
   return (
+
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <LinearGradient
-        colors={["#FAFAFA", "#83239F"]}
-        start={{ x: 1, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.container}
-      >
+      <BackgroundGradient>
         <View style={styles.containerLogo}>
           <Animatable.Image
             animation="flipInX"
@@ -77,7 +78,7 @@ export default function Welcome() {
             </TouchableOpacity>
           )}
         </Animatable.View>
-      </LinearGradient>
+      </BackgroundGradient>
     </KeyboardAvoidingView>
   );
 }

@@ -13,6 +13,14 @@ export default function MyTextInput({
   error,
   icon,
 }) {
+
+  const theme = {
+    colors: {
+      primary: "#83239F",      
+      underlineColor: "transparent",  
+    },
+  };
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
@@ -20,6 +28,7 @@ export default function MyTextInput({
         value={value}
         onChangeText={onChangeText}
         mode="outlined"
+        theme={theme}
         style={styles.input}
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
@@ -35,7 +44,6 @@ export default function MyTextInput({
 const styles = StyleSheet.create({
   inputContainer: {
     marginBottom: 5,
-    bottom: '30%',
     position: "relative",
   },
   input: {

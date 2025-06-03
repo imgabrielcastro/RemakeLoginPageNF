@@ -7,7 +7,7 @@ const LogoScreen = ({ children, style }) => {
     <View style={styles.containerLogo}>
       <Image
         source={require("../../src/assets/logoNF.png")}
-        style={{ width: "70%" }}
+        style={{ width: "70%", height: '30%' }}
         resizeMode="contain"
       />
 
@@ -18,10 +18,11 @@ const LogoScreen = ({ children, style }) => {
 
 const styles = StyleSheet.create({
   containerLogo: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    bottom: "5%"
+    bottom: "5%",
+    marginTop: "10%",
+    marginBottom: '-30%'
   },
 });
 
