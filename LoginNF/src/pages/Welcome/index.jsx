@@ -6,7 +6,6 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-  StatusBar
 } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
@@ -35,8 +34,6 @@ export default function Welcome() {
   };
 
   const navigation = useNavigation();
-
-  <StatusBar backgroundColor="red" />
 
   return (
 
