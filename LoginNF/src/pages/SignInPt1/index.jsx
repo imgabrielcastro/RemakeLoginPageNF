@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import GradientBackGround from "../../components/GradientBackground";
 import { View, StyleSheet } from "react-native";
-import { TextInput } from "react-native-paper";
-import ImputTemplate from "../../components/InputTemplate";
 import MyTextInput from "../../components/InputTemplate";
+import LogoScreen from "../../components/LogoScreen";
 
 export default function Welcome() {
   const [name, setName] = useState("");
@@ -12,11 +11,13 @@ export default function Welcome() {
 
   return (
     <GradientBackGround>
+      <LogoScreen></LogoScreen>
       <View style={styles.container}>
         <MyTextInput
-          label="Nome"
+          label="Nome Completo"
           value={name}
           onChangeText={setName}
+          icon="account-circle"
         ></MyTextInput>
         <MyTextInput
           label="CEP"
@@ -28,10 +29,8 @@ export default function Welcome() {
           value={phone}
           onChangeText={setPhone}
           keyboardType="phone-pad"
+          icon="phone"
         ></MyTextInput>
-        <MyTextInput></MyTextInput>
-        <MyTextInput></MyTextInput>
-        <MyTextInput></MyTextInput>
         <MyTextInput></MyTextInput>
         <MyTextInput></MyTextInput>
         <MyTextInput></MyTextInput>
@@ -43,12 +42,8 @@ export default function Welcome() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 60,
-    borderRadius: 25,
-    color: 'red'
-  },
-  input: {
-    marginBottom: 30,
-    borderRadius: 55,
+    paddingHorizontal: 30,
+    justifyContent: "flex-start",
+    marginTop: 0,
   },
 });
