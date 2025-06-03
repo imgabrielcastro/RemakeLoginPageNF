@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native"; // Importação do TouchableOpacity
-import { Text } from "react-native-paper";
+import { BottomNavigation, Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native"; // Importação do useNavigation
 import MyTextInput from "../../components/InputTemplate";
 import VStack from "../../components/Stacks/VStack";
@@ -32,8 +32,7 @@ export default function CadastroDados() {
       <CustomStatusBar backgroundColor="#83239F" barStyle="light-content" />
       <SafeAreaView style={styles.container}>
         <CustomBackButton />
-        <VStack style={{padding: 16 }}>
-          <VStack>
+        <VStack style={{padding: 16, bottom: 30}}>
             <View style={styles.contain}>
               <Text variant="headlineMedium" style={styles.title}>
                 Preencha os dados para criar a sua conta.
@@ -51,9 +50,9 @@ export default function CadastroDados() {
                 onChangeText={setPhone}
                 icon="phone"
               />
+
             </View>
           </VStack>
-        </VStack>
       </SafeAreaView>
     </>
   );
@@ -66,9 +65,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#000",
+    marginBottom: 20,
   },
   backButton: {
     left: 10,
     zIndex: 1,
+    position: 'absolute',
+    top: 10
   },
 });
