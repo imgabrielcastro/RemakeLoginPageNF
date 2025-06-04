@@ -87,28 +87,37 @@ export default function CadastroDados() {
               />
             </TouchableOpacity>
 
-            
+          <MyTextInput
+              label="Telefone"
+              value={phone}
+              onChangeText={setPhone}
+              icon="phone"
+              keyboardType="numeric"
+            />
+
+
+
           </ScrollView>
           {show && (
-              <Animatable.View
-                animation="fadeInUp"
-                style={styles.datePickerModal}
+            <Animatable.View
+              animation="fadeInUp"
+              style={styles.datePickerModal}
+            >
+              <DateTimePicker
+                value={date}
+                mode="date"
+                display="spinner"
+                onChange={onChangeDate}
+                locale="pt-BR"
+              />
+              <TouchableOpacity
+                style={styles.confirmButton}
+                onPress={handleConfirmDate}
               >
-                <DateTimePicker
-                  value={date}
-                  mode="date"
-                  display="spinner"
-                  onChange={onChangeDate}
-                  locale="pt-BR"
-                />
-                <TouchableOpacity
-                  style={styles.confirmButton}
-                  onPress={handleConfirmDate}
-                >
-                  <Text style={styles.buttonText}>Confirmar</Text>
-                </TouchableOpacity>
-              </Animatable.View>
-            )}
+                <Text style={styles.buttonText}>Confirmar</Text>
+              </TouchableOpacity>
+            </Animatable.View>
+          )}
         </VStack>
       </SafeAreaView>
     </>
@@ -141,7 +150,7 @@ const styles = StyleSheet.create({
   },
   datePickerModal: {
     position: "absolute",
-    bottom: -20, 
+    bottom: -20,
     left: 0,
     right: 0,
     backgroundColor: "#fff",

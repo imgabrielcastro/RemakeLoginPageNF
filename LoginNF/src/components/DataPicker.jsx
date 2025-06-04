@@ -32,6 +32,7 @@ export default function DataPicker({
         secureTextEntry={secureTextEntry}
         error={error}
         pointerEvents="none" 
+        editable={false}
       />
       {icon && (
         <Icon name={icon} size={30} color="#83239F" style={styles.iconStyle} />
