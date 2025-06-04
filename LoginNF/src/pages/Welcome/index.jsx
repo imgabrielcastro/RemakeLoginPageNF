@@ -14,7 +14,6 @@ import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import BackgroundGradient from "../../components/GradientBackground";
 
-
 const mockData = require("../../data/mockData.json");
 
 export default function Welcome() {
@@ -36,7 +35,6 @@ export default function Welcome() {
   const navigation = useNavigation();
 
   return (
-
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}

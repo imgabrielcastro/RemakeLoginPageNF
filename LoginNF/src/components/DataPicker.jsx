@@ -1,14 +1,13 @@
 import React from "react";
-import { StyleSheet  } from "react-native";
+import { StyleSheet, TouchableOpacity  } from "react-native";
 import { View } from "react-native-animatable";
 import { TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-export default function MyTextInput({
+export default function DataPicker({
   label,
   value,
   onChangeText,
-  keyboardType,
   secureTextEntry,
   error,
   icon,
@@ -30,9 +29,9 @@ export default function MyTextInput({
         mode="outlined"
         theme={theme}
         style={styles.input}
-        keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
         error={error}
+        pointerEvents="none" 
       />
       {icon && (
         <Icon name={icon} size={30} color="#83239F" style={styles.iconStyle} />
