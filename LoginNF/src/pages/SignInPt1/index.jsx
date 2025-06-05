@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
   Platform,
   TouchableWithoutFeedback,
-  Keyboard,
   View,
+  Keyboard,
+  Alert,
 } from "react-native";
 import { Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
@@ -19,6 +20,9 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import * as Animatable from "react-native-animatable";
 import DataPickerButton from "../../components/DataPicker";
 import GenderPicker from "../../components/SelectGender";
+import { TextInputMask } from "react-native-masked-text";
+import PhoneInput from "../../components/PhoneInput";
+import TittleInput from "../../components/TittleInput";
 
 const CustomBackButton = () => {
   const navigation = useNavigation();
@@ -44,9 +48,30 @@ export default function CadastroDados() {
   const [gender, setGender] = useState("");
   const [sexModalVisible, setSexModalVisible] = useState(false);
   const [dateModalVisible, setDateModalVisible] = useState(false);
+  const [tempDate, setTempDate] = useState(new Date());
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setSexModalVisible(false);
+        setDateModalVisible(false);
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {}
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   const showSexpicker = () => {
     setSexModalVisible(true);
+    setDateModalVisible(false);
   };
 
   const setSexMasc = () => {
@@ -61,25 +86,37 @@ export default function CadastroDados() {
 
   const showDatepicker = () => {
     setDateModalVisible(true);
+    setSexModalVisible(false);
   };
 
   const onChangeDate = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios" ? true : false);
-    setDate(currentDate);
-    setDataNascimento(currentDate.toLocaleDateString());
+    const currentDate = selectedDate || tempDate;
+    setTempDate(currentDate);
   };
 
   const handleConfirmDate = () => {
+    const currentDate = tempDate;
+
+    if (currentDate > new Date()) {
+      Alert.alert(
+        "Erro",
+        "A data de nascimento não pode ser maior que a data atual."
+      );
+      setTempDate(new Date());
+      setDataNascimento("");
+      setDateModalVisible(false);
+      return;
+    }
+
+    setShow(Platform.OS === "ios" ? true : false);
+    setDate(currentDate);
+    setDataNascimento(currentDate.toLocaleDateString());
     setDateModalVisible(false);
   };
 
-  const closeModalIfClickedOutside = (modalType) => {
-    if (modalType === "sex") {
-      setSexModalVisible(false);
-    } else if (modalType === "date") {
-      setDateModalVisible(false);
-    }
+  const closeModalIfClickedOutside = () => {
+    if (sexModalVisible) setSexModalVisible(false);
+    if (dateModalVisible) setDateModalVisible(false);
   };
 
   return (
@@ -87,78 +124,100 @@ export default function CadastroDados() {
       <CustomStatusBar backgroundColor="#83239F" barStyle="light-content" />
       <SafeAreaView style={styles.container}>
         <CustomBackButton />
-        <VStack style={styles.vStack}>
-          <ScrollView style={styles.scrollContainer}>
-            <Text variant="headlineMedium" style={styles.title}>
-              Preencha os dados para criar a sua conta.
-            </Text>
-            <MyTextInput
-              label="Nome completo"
-              value={name}
-              onChangeText={setName}
-              icon="account-circle"
-            />
+        <TouchableWithoutFeedback onPress={closeModalIfClickedOutside}>
+          <View style={{ flex: 1 }}>
+            <VStack style={styles.vStack}>
+              <ScrollView style={styles.scrollContainer}>
+                <Text variant="headlineMedium" style={styles.title}>
+                  Preencha os dados para criar a sua conta.
+                </Text>
 
-            <MyTextInput
-              label="Telefone"
-              value={phone}
-              onChangeText={setPhone}
-              icon="phone"
-              keyboardType="numeric"
-            />
-            <TouchableOpacity onPress={showDatepicker}>
-              <DataPickerButton
-                label="Data de nascimento"
-                value={dataNascimento}
-                icon="event"
-                editable={false}
-                pointerEvents="none"
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={showSexpicker}>
-              <GenderPicker
-                label="Sexo"
-                value={gender}
-                onValueChange={setSex}
-                icon="venus-mars"
-              />
-            </TouchableOpacity>
-          </ScrollView>
-          {dateModalVisible && (
-            <TouchableWithoutFeedback onPress={() => closeModalIfClickedOutside("date")}>
-              <Animatable.View animation="fadeInUp" style={styles.datePickerModal}>
-                <DateTimePicker
-                  value={date}
-                  mode="date"
-                  display="spinner"
-                  onChange={onChangeDate}
-                  locale="pt-BR"
+                <TittleInput label="Nome"/>
+                <MyTextInput
+                  label="Nome completo"
+                  value={name}
+                  onChangeText={setName}
+                  icon="account-circle"
+                  maxLength={39}
                 />
-                <TouchableOpacity
-                  style={styles.confirmButton}
-                  onPress={handleConfirmDate}
+
+                
+              <TittleInput label="Data de Nascimento"/>
+                <TouchableOpacity onPress={showDatepicker}>
+                  <DataPickerButton
+                    label="Data de nascimento"
+                    value={dataNascimento}
+                    icon="event"
+                    editable={false}
+                    pointerEvents="none"
+                  />
+                </TouchableOpacity>
+
+                <TittleInput label="Sexo"/>
+                <TouchableOpacity onPress={showSexpicker}>
+                  <GenderPicker
+                    label="Sexo"
+                    value={gender}
+                    onValueChange={setSex}
+                    icon="venus-mars"
+                  />
+                </TouchableOpacity>
+
+                <TittleInput label="Telefone"/>
+                <PhoneInput
+                  label="Telefone"
+                  value={phone}
+                  onChangeText={setPhone}
+                  icon="phone"
+                  keyboardType="numeric"
+                  mask="(99) 99999-9999" 
+                />
+
+              </ScrollView>
+              {dateModalVisible && (
+                <Animatable.View
+                  animation="fadeInUp"
+                  style={styles.datePickerModal}
                 >
-                  <Text style={styles.buttonText}>Confirmar</Text>
-                </TouchableOpacity>
-              </Animatable.View>
-            </TouchableWithoutFeedback>
-          )}
+                  <DateTimePicker
+                    value={tempDate}
+                    mode="date"
+                    display="spinner"
+                    onChange={onChangeDate}
+                    locale="pt-BR"
+                  />
+                  <TouchableOpacity
+                    style={styles.confirmButton}
+                    onPress={handleConfirmDate}
+                  >
+                    <Text style={styles.buttonText}>Confirmar</Text>
+                  </TouchableOpacity>
+                </Animatable.View>
+              )}
 
-          {sexModalVisible && (
-            <TouchableWithoutFeedback onPress={() => closeModalIfClickedOutside("sex")}>
-              <Animatable.View animation="fadeInUp" style={styles.datePickerModal}>
-                <TouchableOpacity style={styles.confirmButton} onPress={setSexMasc}>
-                  <Text style={styles.buttonTextGender}>Masculino</Text>
-                </TouchableOpacity>
+              {sexModalVisible && (
+                <Animatable.View
+                  animation="fadeInUp"
+                  style={styles.datePickerModal}
+                >
+                  <TouchableOpacity
+                    style={styles.confirmButton}
+                    onPress={setSexMasc}
+                  >
+                    <Text style={styles.buttonTextGender}>Masculino</Text>
+                  </TouchableOpacity>
 
-                <TouchableOpacity style={styles.confirmButton} onPress={setSexFem}>
-                  <Text style={styles.buttonTextGender}>Feminino</Text>
-                </TouchableOpacity>
-              </Animatable.View>
-            </TouchableWithoutFeedback>
-          )}
-        </VStack>
+                  <TouchableOpacity
+                    style={styles.confirmButton}
+                    onPress={setSexFem}
+                  >
+                    <Text style={styles.buttonTextGender}>Feminino</Text>
+                  </TouchableOpacity>
+                </Animatable.View>
+              )}
+            </VStack>
+          </View>
+        </TouchableWithoutFeedback>
       </SafeAreaView>
     </>
   );
@@ -175,7 +234,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     width: "100%",
-    paddingBottom: 100, // Evita que o conteúdo seja sobreposto pelo modal
+    paddingBottom: 100,
   },
   title: {
     color: "#000",

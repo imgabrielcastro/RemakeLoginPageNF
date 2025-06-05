@@ -12,6 +12,7 @@ export default function MyTextInput({
   secureTextEntry,
   error,
   icon,
+  maxLength,
 }) {
 
   const theme = {
@@ -24,7 +25,6 @@ export default function MyTextInput({
   return (
     <View style={styles.inputContainer}>
       <TextInput
-        label={label}
         value={value}
         onChangeText={onChangeText}
         mode="outlined"
@@ -33,6 +33,7 @@ export default function MyTextInput({
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
         error={error}
+        maxLength={maxLength}
       />
       {icon && (
         <Icon name={icon} size={30} color="#83239F" style={styles.iconStyle} />

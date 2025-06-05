@@ -8,11 +8,11 @@ import {
   Platform,
 } from "react-native";
 import React from "react";
-import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import BackgroundGradient from "../../components/GradientBackground";
+import CustomStatusBar from "../../components/StatusBar";
 
 const mockData = require("../../data/mockData.json");
 
@@ -39,7 +39,9 @@ export default function Welcome() {
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
+
       <BackgroundGradient>
+        <CustomStatusBar barStyle="dark-content" />
         <View style={styles.containerLogo}>
           <Animatable.Image
             animation="flipInX"
