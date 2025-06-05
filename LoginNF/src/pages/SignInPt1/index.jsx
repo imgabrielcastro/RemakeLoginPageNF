@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import {
-  View,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
   Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+  View,
 } from "react-native";
 import { Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
@@ -16,6 +18,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as Animatable from "react-native-animatable";
 import DataPickerButton from "../../components/DataPicker";
+import GenderPicker from "../../components/SelectGender";
 
 const CustomBackButton = () => {
   const navigation = useNavigation();
@@ -35,11 +38,29 @@ export default function CadastroDados() {
   const [name, setName] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
   const [phone, setPhone] = useState("");
+  const [sex, setSex] = useState(false);
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+  const [gender, setGender] = useState("");
+  const [sexModalVisible, setSexModalVisible] = useState(false);
+  const [dateModalVisible, setDateModalVisible] = useState(false);
+
+  const showSexpicker = () => {
+    setSexModalVisible(true);
+  };
+
+  const setSexMasc = () => {
+    setGender("Masculino");
+    setSexModalVisible(false);
+  };
+
+  const setSexFem = () => {
+    setGender("Feminino");
+    setSexModalVisible(false);
+  };
 
   const showDatepicker = () => {
-    setShow(true);
+    setDateModalVisible(true);
   };
 
   const onChangeDate = (event, selectedDate) => {
@@ -50,7 +71,15 @@ export default function CadastroDados() {
   };
 
   const handleConfirmDate = () => {
-    setShow(false); // Fechar o modal quando o usuário confirmar
+    setDateModalVisible(false);
+  };
+
+  const closeModalIfClickedOutside = (modalType) => {
+    if (modalType === "sex") {
+      setSexModalVisible(false);
+    } else if (modalType === "date") {
+      setDateModalVisible(false);
+    }
   };
 
   return (
@@ -87,36 +116,47 @@ export default function CadastroDados() {
               />
             </TouchableOpacity>
 
-          <MyTextInput
-              label="Telefone"
-              value={phone}
-              onChangeText={setPhone}
-              icon="phone"
-              keyboardType="numeric"
-            />
-
-
-
-          </ScrollView>
-          {show && (
-            <Animatable.View
-              animation="fadeInUp"
-              style={styles.datePickerModal}
-            >
-              <DateTimePicker
-                value={date}
-                mode="date"
-                display="spinner"
-                onChange={onChangeDate}
-                locale="pt-BR"
+            <TouchableOpacity onPress={showSexpicker}>
+              <GenderPicker
+                label="Sexo"
+                value={gender}
+                onValueChange={setSex}
+                icon="venus-mars"
               />
-              <TouchableOpacity
-                style={styles.confirmButton}
-                onPress={handleConfirmDate}
-              >
-                <Text style={styles.buttonText}>Confirmar</Text>
-              </TouchableOpacity>
-            </Animatable.View>
+            </TouchableOpacity>
+          </ScrollView>
+          {dateModalVisible && (
+            <TouchableWithoutFeedback onPress={() => closeModalIfClickedOutside("date")}>
+              <Animatable.View animation="fadeInUp" style={styles.datePickerModal}>
+                <DateTimePicker
+                  value={date}
+                  mode="date"
+                  display="spinner"
+                  onChange={onChangeDate}
+                  locale="pt-BR"
+                />
+                <TouchableOpacity
+                  style={styles.confirmButton}
+                  onPress={handleConfirmDate}
+                >
+                  <Text style={styles.buttonText}>Confirmar</Text>
+                </TouchableOpacity>
+              </Animatable.View>
+            </TouchableWithoutFeedback>
+          )}
+
+          {sexModalVisible && (
+            <TouchableWithoutFeedback onPress={() => closeModalIfClickedOutside("sex")}>
+              <Animatable.View animation="fadeInUp" style={styles.datePickerModal}>
+                <TouchableOpacity style={styles.confirmButton} onPress={setSexMasc}>
+                  <Text style={styles.buttonTextGender}>Masculino</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.confirmButton} onPress={setSexFem}>
+                  <Text style={styles.buttonTextGender}>Feminino</Text>
+                </TouchableOpacity>
+              </Animatable.View>
+            </TouchableWithoutFeedback>
           )}
         </VStack>
       </SafeAreaView>
@@ -173,5 +213,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 16,
+  },
+
+  buttonTextGender: {
+    color: "#fff",
+    fontSize: 16,
+    height: 20,
+    margin: 5,
   },
 });

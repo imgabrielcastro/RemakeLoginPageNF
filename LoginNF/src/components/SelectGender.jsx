@@ -2,7 +2,8 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { View } from "react-native-animatable";
 import { TextInput } from "react-native-paper";
-import Icon from "react-native-vector-icons/MaterialIcons";
+// import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function DataPicker({
   label,
