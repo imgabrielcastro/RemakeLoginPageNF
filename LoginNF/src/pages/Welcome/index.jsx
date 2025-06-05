@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   containerForm: {
-    flex: 1.8,
+    flex: 2,
     backgroundColor: "#FAFAFA",
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,

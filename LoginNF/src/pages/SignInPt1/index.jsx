@@ -132,7 +132,7 @@ export default function CadastroDados() {
                   Preencha os dados para criar a sua conta.
                 </Text>
 
-                <TittleInput label="Nome"/>
+                <TittleInput label="Nome" />
                 <MyTextInput
                   label="Nome completo"
                   value={name}
@@ -141,8 +141,7 @@ export default function CadastroDados() {
                   maxLength={39}
                 />
 
-                
-              <TittleInput label="Data de Nascimento"/>
+                <TittleInput label="Data de Nascimento" />
                 <TouchableOpacity onPress={showDatepicker}>
                   <DataPickerButton
                     label="Data de nascimento"
@@ -153,7 +152,7 @@ export default function CadastroDados() {
                   />
                 </TouchableOpacity>
 
-                <TittleInput label="Sexo"/>
+                <TittleInput label="Sexo" />
                 <TouchableOpacity onPress={showSexpicker}>
                   <GenderPicker
                     label="Sexo"
@@ -163,16 +162,15 @@ export default function CadastroDados() {
                   />
                 </TouchableOpacity>
 
-                <TittleInput label="Telefone"/>
+                <TittleInput label="Telefone" />
                 <PhoneInput
                   label="Telefone"
                   value={phone}
                   onChangeText={setPhone}
                   icon="phone"
                   keyboardType="numeric"
-                  mask="(99) 99999-9999" 
+                  mask="(99) 99999-9999"
                 />
-
               </ScrollView>
               {dateModalVisible && (
                 <Animatable.View

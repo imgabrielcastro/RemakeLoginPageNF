@@ -2,7 +2,7 @@ import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet, View } from 'react-native';
 
-const GradientBackGround = ({ children, style }) =>{
+const BackgroundGradient = ({ children, style }) =>{
   return (
     <LinearGradient
       colors={["#FAFAFA", "#83239F"]}
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GradientBackGround;
+export default BackgroundGradient;

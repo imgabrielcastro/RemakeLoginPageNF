@@ -11,11 +11,11 @@ export default function TittleInput({ label }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 8, // Espaço entre a label e o input
+    marginBottom: 7, 
   },
   label: {
-    fontSize: 12, // Tamanho pequeno para a label
-    color: "#83239F", // Cor do texto conforme o projeto
-    fontWeight: "bold", // Deixar o texto em negrito para destaque
+    fontSize: 13, 
+    color: "#83239F", 
+    fontWeight: "bold", 
   },
 });

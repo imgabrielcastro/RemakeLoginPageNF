@@ -5,7 +5,6 @@ import { TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 export default function MyTextInput({
-  label,
   value,
   onChangeText,
   keyboardType,

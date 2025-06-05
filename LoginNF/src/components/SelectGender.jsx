@@ -2,11 +2,9 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { View } from "react-native-animatable";
 import { TextInput } from "react-native-paper";
-// import Icon from "react-native-vector-icons/MaterialIcons";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function DataPicker({
-  label,
   value,
   onChangeText,
   secureTextEntry,
@@ -24,7 +22,6 @@ export default function DataPicker({
   return (
     <View style={styles.inputContainer}>
       <TextInput
-        label={label}
         value={value}
         onChangeText={onChangeText}
         mode="outlined"
