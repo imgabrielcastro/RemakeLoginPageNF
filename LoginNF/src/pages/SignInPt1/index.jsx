@@ -9,12 +9,12 @@ import {
   Keyboard,
   Alert,
   KeyboardAvoidingView,
+  StatusBar,
 } from "react-native";
 import { Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import MyTextInput from "../../components/InputTemplate";
 import VStack from "../../components/Stacks/VStack";
-import { SafeAreaView } from "react-native-safe-area-context";
 import CustomStatusBar from "../../components/StatusBar";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -25,21 +25,8 @@ import PhoneInput from "../../components/PhoneInput";
 import TittleInput from "../../components/TittleInput";
 import CpfInput from "../../components/CpfInput";
 
-const CustomBackButton = () => {
+const CadastroDados = () => {
   const navigation = useNavigation();
-
-  const handleBackPress = () => {
-    navigation.navigate("Welcome");
-  };
-
-  return (
-    <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
-      <Icon name="chevron-left" size={30} color="black" />
-    </TouchableOpacity>
-  );
-};
-
-export default function CadastroDados() {
   const [name, setName] = useState("");
   const [cpf, setCpf] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
@@ -52,6 +39,30 @@ export default function CadastroDados() {
   const [sexModalVisible, setSexModalVisible] = useState(false);
   const [dateModalVisible, setDateModalVisible] = useState(false);
   const [tempDate, setTempDate] = useState(new Date());
+
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: true,
+      headerTitle: "Cadastro",
+      headerStyle: {
+        backgroundColor: "#83239F",
+      },
+      headerTitleStyle: {
+        fontWeight: "bold",
+        fontSize: 20,
+        color: "white",
+      },
+      headerLeft: () => (
+        <TouchableOpacity onPress={handleBackPress} style={{ marginBottom: 4 }}>
+          <Icon name="chevron-left" size={32} color="white" />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -123,150 +134,199 @@ export default function CadastroDados() {
 
   const modalIsOpen = sexModalVisible || dateModalVisible;
 
+  const renderCustomBackButton = () => {
+    return (
+      <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
+        <Icon name="chevron-left" size={30} color="black" />
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <>
-      <CustomStatusBar backgroundColor="#83239F" barStyle="light-content" />
-      <SafeAreaView style={{ flex: 1, backgroundColor: "#fafafa" }}>
-        <CustomBackButton />
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={Platform.OS === "ios" ? 130 : 0}
-        >
-          <View style={{ flex: 1, position: "relative" }}>
-            {modalIsOpen && (
-              // Overlay que fecha o modal ao clicar fora
-              <TouchableWithoutFeedback onPress={closeModalIfClickedOutside}>
-                <View style={styles.modalOverlay} pointerEvents="auto" />
-              </TouchableWithoutFeedback>
-            )}
+      <KeyboardAvoidingView
+        style={{ backgroundColor: "#fafafa", flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <StatusBar barStyle="light-content" />
+        <View style={{ flex: 1, position: "relative" }}>
+          {modalIsOpen && (
+            // Overlay que fecha o modal ao clicar fora
+            <TouchableWithoutFeedback onPress={closeModalIfClickedOutside}>
+              <View style={styles.modalOverlay} pointerEvents="auto" />
+            </TouchableWithoutFeedback>
+          )}
 
+          <VStack style={{ flex: 1 }}>
             <ScrollView
               style={{ flex: 1 }}
-              contentContainerStyle={styles.scrollContent}
+              contentContainerStyle={{ padding: 16, paddingBottom: 100 }}
               keyboardShouldPersistTaps="handled"
               scrollEnabled={!modalIsOpen}
               showsVerticalScrollIndicator={true}
             >
-              <View style={styles.innerContent}>
-                <Text variant="headlineMedium" style={styles.title}>
-                  Preencha os dados para criar a sua conta.
-                </Text>
+              <Text variant="headlineMedium" style={styles.title}>
+                Preencha os dados para criar a sua conta.
+              </Text>
 
-                {/* Entradas */}
-                <TittleInput label="Nome completo" />
-                <MyTextInput
-                  value={name}
-                  onChangeText={setName}
-                  icon="account-circle"
-                  maxLength={39}
-                  editable={!modalIsOpen}
+              {/* Entradas */}
+              <TittleInput label="Nome completo" />
+              <MyTextInput
+                value={name}
+                onChangeText={setName}
+                icon="account-circle"
+                maxLength={39}
+                editable={!modalIsOpen}
+              />
+
+              <TittleInput label="Data de Nascimento" />
+              <TouchableOpacity onPress={showDatepicker} disabled={modalIsOpen}>
+                <DataPickerButton
+                  value={dataNascimento}
+                  icon="event"
+                  editable={false}
+                  pointerEvents="none"
                 />
+              </TouchableOpacity>
 
-                <TittleInput label="Data de Nascimento" />
-                <TouchableOpacity onPress={showDatepicker} disabled={modalIsOpen}>
-                  <DataPickerButton
-                    value={dataNascimento}
-                    icon="event"
-                    editable={false}
-                    pointerEvents="none"
-                  />
-                </TouchableOpacity>
-
-                <TittleInput label="Sexo" />
-                <TouchableOpacity onPress={showSexpicker} disabled={modalIsOpen}>
-                  <GenderPicker value={gender} onValueChange={setSex} icon="venus-mars" />
-                </TouchableOpacity>
-
-                <TittleInput label="E-mail *" />
-                <MyTextInput
-                  value={email}
-                  onChangeText={setEmail}
-                  icon="mail"
-                  maxLength={39}
-                  editable={!modalIsOpen}
+              <TittleInput label="Sexo" />
+              <TouchableOpacity onPress={showSexpicker} disabled={modalIsOpen}>
+                <GenderPicker
+                  value={gender}
+                  onValueChange={setSex}
+                  icon="venus-mars"
                 />
+              </TouchableOpacity>
 
-                <TittleInput label="Telefone" />
-                <PhoneInput
-                  value={phone}
-                  onChangeText={setPhone}
-                  icon="phone"
-                  keyboardType="numeric"
-                  mask="(99) 99999-9999"
-                  editable={!modalIsOpen}
-                  maxLength={15}
-                />
+              <TittleInput label="E-mail *" />
+              <MyTextInput
+                value={email}
+                onChangeText={setEmail}
+                icon="mail"
+                maxLength={39}
+                editable={!modalIsOpen}
+              />
 
-                <TittleInput label="CPF" />
-                <CpfInput
-                  value={cpf}
-                  onChangeText={setCpf}
-                  icon="person"
-                  keyboardType="numeric"
-                  mask="111.111.111-11"
-                  editable={!modalIsOpen}
-                  maxLength={14}
-                />
+              <TittleInput label="Telefone" />
+              <PhoneInput
+                value={phone}
+                onChangeText={setPhone}
+                icon="phone"
+                keyboardType="numeric"
+                mask="(99) 99999-9999"
+                editable={!modalIsOpen}
+                maxLength={15}
+              />
 
-                <TouchableOpacity
-                  style={styles.button}
-                  // onPress={handleSubmit}
-                >
-                  <Text style={styles.buttonText}>Próximo</Text>
-                </TouchableOpacity>
-              </View>
+              <TittleInput label="CPF" />
+              <CpfInput
+                value={cpf}
+                onChangeText={setCpf}
+                icon="person"
+                keyboardType="numeric"
+                mask="111.111.111-11"
+                editable={!modalIsOpen}
+                maxLength={14}
+              />
             </ScrollView>
+            <VStack style={{ padding: 16, paddingBottom: 32, gap: 12 }}>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#83239F",
+                  borderRadius: 12,
+                  paddingVertical: 16,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                // onPress={handleSubmit}
+              >
+                <Text style={styles.buttonText}>Próximo</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "transparent",
+                  color: "#83239F",
+                  borderWidth: 2,
+                  borderColor: "#83239F",
+                  borderRadius: 12,
+                  paddingVertical: 16,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                onPress={handleBackPress}
+              >
+                <Text
+                  style={{ color: "#83239F", fontSize: 16, fontWeight: "bold" }}
+                >
+                  Voltar
+                </Text>
+              </TouchableOpacity>
+            </VStack>
+          </VStack>
 
-            {/* Modal Data */}
-            {dateModalVisible && (
-              <TouchableWithoutFeedback onPress={() => { /* impede fechar ao clicar dentro do modal */ }}>
-                <Animatable.View animation="fadeInUp" style={styles.datePickerModal} pointerEvents="auto">
-                  <DateTimePicker
-                    value={tempDate}
-                    mode="date"
-                    display="spinner"
-                    onChange={onChangeDate}
-                    locale="pt-BR"
-                  />
-                  <TouchableOpacity style={styles.confirmButton} onPress={handleConfirmDate}>
-                    <Text style={styles.buttonText}>Confirmar</Text>
-                  </TouchableOpacity>
-                </Animatable.View>
-              </TouchableWithoutFeedback>
-            )}
+          {/* Modal Data */}
+          {dateModalVisible && (
+            <TouchableWithoutFeedback
+              onPress={() => {
+                /* impede fechar ao clicar dentro do modal */
+              }}
+            >
+              <Animatable.View
+                animation="fadeInUp"
+                style={styles.datePickerModal}
+                pointerEvents="auto"
+              >
+                <DateTimePicker
+                  value={tempDate}
+                  mode="date"
+                  display="spinner"
+                  onChange={onChangeDate}
+                  locale="pt-BR"
+                />
+                <TouchableOpacity
+                  style={styles.confirmButton}
+                  onPress={handleConfirmDate}
+                >
+                  <Text style={styles.buttonText}>Confirmar</Text>
+                </TouchableOpacity>
+              </Animatable.View>
+            </TouchableWithoutFeedback>
+          )}
 
-            {/* Modal Sexo */}
-            {sexModalVisible && (
-              <TouchableWithoutFeedback onPress={() => { /* impede fechar ao clicar dentro do modal */ }}>
-                <Animatable.View animation="fadeInUp" style={styles.datePickerModal} pointerEvents="auto">
-                  <TouchableOpacity style={styles.confirmButton} onPress={setSexMasc}>
-                    <Text style={styles.buttonTextGender}>Masculino</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.confirmButton} onPress={setSexFem}>
-                    <Text style={styles.buttonTextGender}>Feminino</Text>
-                  </TouchableOpacity>
-                </Animatable.View>
-              </TouchableWithoutFeedback>
-            )}
-          </View>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
+          {/* Modal Sexo */}
+          {sexModalVisible && (
+            <TouchableWithoutFeedback
+              onPress={() => {
+                /* impede fechar ao clicar dentro do modal */
+              }}
+            >
+              <Animatable.View
+                animation="fadeInUp"
+                style={styles.datePickerModal}
+                pointerEvents="auto"
+              >
+                <TouchableOpacity
+                  style={styles.confirmButton}
+                  onPress={setSexMasc}
+                >
+                  <Text style={styles.buttonTextGender}>Masculino</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.confirmButton}
+                  onPress={setSexFem}
+                >
+                  <Text style={styles.buttonTextGender}>Feminino</Text>
+                </TouchableOpacity>
+              </Animatable.View>
+            </TouchableWithoutFeedback>
+          )}
+        </View>
+      </KeyboardAvoidingView>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#fafafa",
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 100,
-  },
-  innerContent: {
-    paddingHorizontal: 16,
-  },
   title: {
     color: "#000",
     marginBottom: 20,
@@ -301,10 +361,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 10,
   },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-  },
   buttonTextGender: {
     color: "#fff",
     fontSize: 16,
@@ -318,20 +374,11 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 15,
   },
-    button: {
-    position: "absolute",
-    backgroundColor: "#83239F",
-    borderRadius: 15,
-    paddingVertical: 15,
-    width: "60%",
-    alignSelf: "center",
-    bottom: "-10%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   buttonText: {
     fontSize: 18,
     color: "#fff",
     fontWeight: "bold",
   },
 });
+
+export default CadastroDados;
