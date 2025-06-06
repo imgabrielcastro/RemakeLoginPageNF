@@ -39,7 +39,6 @@ export default function Welcome() {
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-
       <BackgroundGradient>
         <CustomStatusBar barStyle="dark-content" />
         <View style={styles.containerLogo}>
@@ -70,9 +69,20 @@ export default function Welcome() {
           />
 
           {!keyboardVisible && (
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <View style={{paddingTop: 40}}>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#83239F",
+                borderRadius: 12,
+                paddingVertical: 16,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              onPress={handleSubmit}
+            >
               <Text style={styles.buttonText}>Vamos lá!</Text>
             </TouchableOpacity>
+            </View>
           )}
         </Animatable.View>
       </BackgroundGradient>

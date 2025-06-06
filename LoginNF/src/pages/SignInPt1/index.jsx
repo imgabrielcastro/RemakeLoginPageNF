@@ -15,7 +15,6 @@ import { Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import MyTextInput from "../../components/InputTemplate";
 import VStack from "../../components/Stacks/VStack";
-import CustomStatusBar from "../../components/StatusBar";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as Animatable from "react-native-animatable";
@@ -134,14 +133,6 @@ const CadastroDados = () => {
 
   const modalIsOpen = sexModalVisible || dateModalVisible;
 
-  const renderCustomBackButton = () => {
-    return (
-      <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
-        <Icon name="chevron-left" size={30} color="black" />
-      </TouchableOpacity>
-    );
-  };
-
   return (
     <>
       <KeyboardAvoidingView
@@ -151,7 +142,6 @@ const CadastroDados = () => {
         <StatusBar barStyle="light-content" />
         <View style={{ flex: 1, position: "relative" }}>
           {modalIsOpen && (
-            // Overlay que fecha o modal ao clicar fora
             <TouchableWithoutFeedback onPress={closeModalIfClickedOutside}>
               <View style={styles.modalOverlay} pointerEvents="auto" />
             </TouchableWithoutFeedback>
@@ -169,7 +159,6 @@ const CadastroDados = () => {
                 Preencha os dados para criar a sua conta.
               </Text>
 
-              {/* Entradas */}
               <TittleInput label="Nome completo" />
               <MyTextInput
                 value={name}
@@ -266,11 +255,7 @@ const CadastroDados = () => {
 
           {/* Modal Data */}
           {dateModalVisible && (
-            <TouchableWithoutFeedback
-              onPress={() => {
-                /* impede fechar ao clicar dentro do modal */
-              }}
-            >
+            <TouchableWithoutFeedback onPress={() => {}}>
               <Animatable.View
                 animation="fadeInUp"
                 style={styles.datePickerModal}
@@ -287,19 +272,23 @@ const CadastroDados = () => {
                   style={styles.confirmButton}
                   onPress={handleConfirmDate}
                 >
-                  <Text style={styles.buttonText}>Confirmar</Text>
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      color: "#fff",
+                      fontWeight: "bold",
+                      padding: 8,
+                    }}
+                  >
+                    Confirmar
+                  </Text>
                 </TouchableOpacity>
               </Animatable.View>
             </TouchableWithoutFeedback>
           )}
 
-          {/* Modal Sexo */}
           {sexModalVisible && (
-            <TouchableWithoutFeedback
-              onPress={() => {
-                /* impede fechar ao clicar dentro do modal */
-              }}
-            >
+            <TouchableWithoutFeedback onPress={() => {}}>
               <Animatable.View
                 animation="fadeInUp"
                 style={styles.datePickerModal}
@@ -353,13 +342,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     zIndex: 30,
+    paddingBottom: 50,
   },
   confirmButton: {
     backgroundColor: "#83239F",
-    padding: 10,
+    padding: 0,
     borderRadius: 5,
+    padding: 10,
     alignItems: "center",
     marginTop: 10,
+    paddingBottom: 10,
   },
   buttonTextGender: {
     color: "#fff",

@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 10,
     color: "#fff",
+    paddingRight: 40,
   },
   iconStyle: {
     position: "absolute",
