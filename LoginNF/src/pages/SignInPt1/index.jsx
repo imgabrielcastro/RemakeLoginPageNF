@@ -295,13 +295,23 @@ const CadastroDados = () => {
                 pointerEvents="auto"
               >
                 <TouchableOpacity
-                  style={styles.confirmButton}
+                  style={{
+                    backgroundColor: "#83239F",
+                    borderRadius: 12,
+                    paddingVertical: 16,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                   onPress={setSexMasc}
                 >
                   <Text style={styles.buttonTextGender}>Masculino</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={styles.confirmButton}
+                  style={{backgroundColor: "#83239F",
+                  borderRadius: 12,
+                  paddingVertical: 16,
+                  alignItems: "center",
+                  justifyContent: "center",}}
                   onPress={setSexFem}
                 >
                   <Text style={styles.buttonTextGender}>Feminino</Text>
@@ -328,6 +338,7 @@ const styles = StyleSheet.create({
     top: 10,
   },
   datePickerModal: {
+    gap: 12,
     position: "absolute",
     bottom: -20,
     left: 0,
@@ -356,6 +367,7 @@ const styles = StyleSheet.create({
   buttonTextGender: {
     color: "#fff",
     fontSize: 16,
+    fontWeight: "bold",
     margin: 5,
   },
   modalOverlay: {
