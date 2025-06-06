@@ -5,7 +5,7 @@ import { TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { TextInputMask } from "react-native-masked-text"; 
 
-export default function PhoneInput({
+export default function CpfInput({
   value,
   onChangeText,
   keyboardType,
@@ -30,15 +30,14 @@ export default function PhoneInput({
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
         error={error}
-        maxLength={maxLength}
         render={() => 
           <TextInputMask 
-            type="cel-phone" 
+            type="cpf" 
             onChangeText={onChangeText} 
             value={value} 
             style={styles.inputJr} 
-            maxLength={maxLength}
             selectionColor="#83239F"
+            maxLength={maxLength}
           />
         }
       />
