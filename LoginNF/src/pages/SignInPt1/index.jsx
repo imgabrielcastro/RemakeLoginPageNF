@@ -23,6 +23,7 @@ import GenderPicker from "../../components/SelectGender";
 import PhoneInput from "../../components/PhoneInput";
 import TittleInput from "../../components/TittleInput";
 import CpfInput from "../../components/CpfInput";
+import StepIndicator from "../../components/Stacks/StepIndicator";
 
 const CadastroDados = () => {
   const navigation = useNavigation();
@@ -217,6 +218,10 @@ const CadastroDados = () => {
                 editable={!modalIsOpen}
                 maxLength={14}
               />
+              
+              <StepIndicator currentStep={1} totalSteps={3}/>
+
+
             </ScrollView>
             <VStack style={{ padding: 16, paddingBottom: 32, gap: 12 }}>
               <TouchableOpacity
@@ -231,7 +236,7 @@ const CadastroDados = () => {
               >
                 <Text style={styles.buttonText}>Próximo</Text>
               </TouchableOpacity>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={{
                   backgroundColor: "transparent",
                   color: "#83239F",
@@ -249,7 +254,7 @@ const CadastroDados = () => {
                 >
                   Voltar
                 </Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </VStack>
           </VStack>
 
