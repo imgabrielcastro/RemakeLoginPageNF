@@ -45,6 +45,12 @@ const CadastroDados = () => {
   };
 
   const handleNextPress = () =>{
+
+    // if (name.trim() === "" || email.trim() === "" || cpf.trim() ==="" || dataNascimento.trim() ===""|| gender.trim()==="" || phone.trim()==="" ){
+    // Alert.alert("Preencha todos os dados obrigatórios!");
+    // console.log("Ta pegando")
+    // return;
+    // }
     navigation.navigate("SignIn2");
   };
 
@@ -160,8 +166,13 @@ const CadastroDados = () => {
               scrollEnabled={!modalIsOpen}
               showsVerticalScrollIndicator={true}
             >
+              <Text variant="headlineLarge" style={{fontWeight: 'bold', color: '#83239F', textAlign:"center"}}>
+                Dados Pessoais
+              </Text>
+
+
               <Text variant="headlineMedium" style={styles.title}>
-                Preencha os dados para criar a sua conta.
+                Preencha seus dados pessoais.
               </Text>
 
               <TittleInput label="Nome completo" />
@@ -339,6 +350,7 @@ const styles = StyleSheet.create({
     color: "#000",
     marginBottom: 20,
     fontSize: 22,
+    textAlign: 'center'
   },
   backButton: {
     left: 10,

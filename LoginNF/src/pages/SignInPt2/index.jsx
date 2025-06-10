@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import MyTextInput from "../../components/InputTemplate";
 import VStack from "../../components/Stacks/VStack";
 import HStack from "../../components/Stacks/HStack";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import * as Animatable from "react-native-animatable";
 import TittleInput from "../../components/TittleInput";
 import StepIndicator from "../../components/StepIndicator";
@@ -75,7 +75,7 @@ const CadastroDados2 = () => {
                 variant="headlineMedium"
                 style={{ color: "#000", marginBottom: 20, fontSize: 22 }}
               >
-                Preencha os dados para criar a sua conta.
+                Preencha os dados do seu do endereço.
               </Text>
 
               {/* <TittleInput label="Nome completo *" />
@@ -90,7 +90,6 @@ const CadastroDados2 = () => {
               <CepInput
                 value={cep}
                 onChangeText={setCep}
-                icon="world-o"
                 keyboardType="numeric"
                 mask="11111-111"
                 maxLength={9}
@@ -100,14 +99,14 @@ const CadastroDados2 = () => {
               <MyTextInput
                 value={endereco}
                 onChangeText={setEndereco}
-                icon="person"
+                
               />
 
               <TittleInput label="Número" />
               <MyTextInput
                 value={numero}
                 onChangeText={setNumero}
-                icon="person"
+                
                 keyboardType="numeric"
               />
 
@@ -115,21 +114,21 @@ const CadastroDados2 = () => {
               <MyTextInput
                 value={bairro}
                 onChangeText={setBairro}
-                icon="person"
+                
               />
 
               <TittleInput label="Complemento" />
               <MyTextInput
                 value={complemento}
                 onChangeText={setComplemento}
-                icon="person"
+                
               />
 
               <TittleInput label="Cidade" />
               <MyTextInput
                 value={cidade}
                 onChangeText={setCidade}
-                icon="person"
+                
               />
             </ScrollView>
             <VStack style={{ padding: 16, paddingBottom: "15%", gap: 12 }}>

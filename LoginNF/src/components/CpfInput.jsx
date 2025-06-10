@@ -1,7 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { View } from "react-native-animatable";
-import { TextInput } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { TextInputMask } from "react-native-masked-text"; 
 
@@ -9,37 +7,21 @@ export default function CpfInput({
   value,
   onChangeText,
   keyboardType,
-  secureTextEntry,
   error,
   icon,
   maxLength,
 }) {
-  const theme = {
-    colors: {
-      primary: "#83239F", 
-      underlineColor: "transparent",
-    },
-  };
-
   return (
     <View style={styles.inputContainer}>
-      <TextInput
+      <TextInputMask
+        type="cpf"
         value={value}
-        theme={theme}
-        style={styles.input}
+        onChangeText={onChangeText}
         keyboardType={keyboardType}
-        secureTextEntry={secureTextEntry}
         error={error}
-        render={() => 
-          <TextInputMask 
-            type="cpf" 
-            onChangeText={onChangeText} 
-            value={value} 
-            style={styles.inputJr} 
-            selectionColor="#83239F"
-            maxLength={maxLength}
-          />
-        }
+        maxLength={maxLength}
+        style={styles.input}
+        selectionColor="#83239F"
       />
       {icon && (
         <Icon name={icon} size={30} color="#83239F" style={styles.iconStyle} />
@@ -57,18 +39,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 5, 
     paddingHorizontal: 16, 
-    height: 50, 
+    height: 40, 
     borderWidth: 1, 
     borderColor: "#78747d", 
   },
-  inputJr: {
-    borderRadius: 5, 
-    paddingHorizontal: 16, 
-    minHeight: 50, 
-  },
   iconStyle: {
     position: "absolute",
-    top: 15,
+    top: 7,
     right: 15, 
   },
 });

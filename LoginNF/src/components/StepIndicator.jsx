@@ -15,7 +15,7 @@ const StepIndicator = ({ currentStep, totalSteps }) => {
               key={index}
               style={{
                 backgroundColor: isActive ? '#A020F0' : '#e0e0e0',
-                width: '30%',
+                width: '32%',
                 height: 4,
                 borderRadius: 2,
               }}

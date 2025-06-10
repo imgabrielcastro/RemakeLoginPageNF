@@ -23,7 +23,7 @@ export default function CepInput({
         maxLength={maxLength}
       />
       {icon && (
-        <Icon name={icon} size={30} color="#83239F" style={styles.iconStyle} />
+        <Icon name={icon} size={25} color="#83239F" style={styles.iconStyle} />
       )}
     </View>
   );

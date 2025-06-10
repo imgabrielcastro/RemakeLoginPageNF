@@ -35,7 +35,7 @@ export default function MyTextInput({
         maxLength={maxLength}
       />
       {icon && (
-        <Icon name={icon} size={30} color="#83239F" style={styles.iconStyle} />
+        <Icon name={icon} size={25} color="#83239F" style={styles.iconStyle} />
       )}
     </View>
   );
@@ -45,15 +45,18 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginBottom: 5,
     position: "relative",
+    color: '#000'
   },
   input: {
     marginBottom: 10,
-    color: "#fff",
     paddingRight: 40,
+    height: 40,
+    fontSize: 18,
+    borderolor: '#d8d8d8'
   },
   iconStyle: {
     position: "absolute",
-    top: 15,
+    top: 10,
     right: 15,
   },
 });

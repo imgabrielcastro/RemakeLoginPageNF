@@ -33,7 +33,7 @@ export default function DataPicker({
         editable={false}
       />
       {icon && (
-        <Icon name={icon} size={30} color="#83239F" style={styles.iconStyle} />
+        <Icon name={icon} size={25} color="#83239F" style={styles.iconStyle} />
       )}
     </View>
   );
@@ -47,10 +47,11 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 10,
     color: "#fff",
+    height: 40,
   },
   iconStyle: {
     position: "absolute",
-    top: 15,
+    top: 10,
     right: 15,
   },
 });
