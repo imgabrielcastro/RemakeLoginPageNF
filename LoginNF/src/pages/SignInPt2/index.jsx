@@ -12,7 +12,8 @@ import { Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import MyTextInput from "../../components/InputTemplate";
 import VStack from "../../components/Stacks/VStack";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import HStack from "../../components/Stacks/HStack";
+import Icon from "react-native-vector-icons/FontAwesome";
 import * as Animatable from "react-native-animatable";
 import TittleInput from "../../components/TittleInput";
 import StepIndicator from "../../components/StepIndicator";
@@ -89,7 +90,7 @@ const CadastroDados2 = () => {
               <CepInput
                 value={cep}
                 onChangeText={setCep}
-                icon="person"
+                icon="world-o"
                 keyboardType="numeric"
                 mask="11111-111"
                 maxLength={9}
@@ -130,14 +131,9 @@ const CadastroDados2 = () => {
                 onChangeText={setCidade}
                 icon="person"
               />
-
-              <View
-                style={{ flexDirection: "row", justifyContent: "flex-end" }}
-              >
-                <StepIndicator currentStep={2} totalSteps={3} />
-              </View>
             </ScrollView>
-            <VStack style={{ padding: 16, paddingBottom: 32, gap: 12 }}>
+            <VStack style={{ padding: 16, paddingBottom: "15%", gap: 12 }}>
+              <StepIndicator currentStep={2} totalSteps={3}/>
               <TouchableOpacity
                 style={{
                   backgroundColor: "#83239F",
@@ -145,9 +141,9 @@ const CadastroDados2 = () => {
                   paddingVertical: 16,
                   alignItems: "center",
                   justifyContent: "center",
+                  
                 }}
                 onPress={handleNextPress}
-                // onPress={handleSubmit}
               >
                 <Text style={styles.buttonText}>Próximo</Text>
               </TouchableOpacity>

@@ -5,8 +5,8 @@ const StepIndicator = ({ currentStep, totalSteps }) => {
   const text = `ETAPA ${currentStep} DE ${totalSteps}`;
 
   return (
-    <View style={{ gap: 4, salignSelf: 'flex-end'}}>
-      <Text style={{ fontSize: 12, color: '#212121' }}>{text}</Text>
+    <View style={{ gap: 4, alignSelf: 'center', justifyContent:'center'}}>
+      <Text style={{ fontSize: 14, color: '#212121', textAlign: 'center' }}>{text}</Text>
       <View style={{ flexDirection: 'row', gap: 8 }}>
         {Array.from({ length: totalSteps }).map((_, index) => {
           const isActive = index < currentStep;
@@ -15,10 +15,9 @@ const StepIndicator = ({ currentStep, totalSteps }) => {
               key={index}
               style={{
                 backgroundColor: isActive ? '#A020F0' : '#e0e0e0',
-                width: 24,
+                width: '30%',
                 height: 4,
                 borderRadius: 2,
-                
               }}
             />
           );
