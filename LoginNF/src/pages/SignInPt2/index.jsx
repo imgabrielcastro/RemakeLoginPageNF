@@ -4,10 +4,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Platform,
-  TouchableWithoutFeedback,
   View,
-  Keyboard,
-  Alert,
   KeyboardAvoidingView,
   StatusBar,
 } from "react-native";
@@ -31,8 +28,12 @@ const CadastroDados2 = () => {
     navigation.goBack();
   };
 
-
-  const [cep, setCep] = useState("")
+  const [cep, setCep] = useState("");
+  const [endereco, setEndereco] = useState("");
+  const [numero, setNumero] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [complemento, setComplemento] = useState("");
+  const [cidade, setCidade] = useState("");
 
   useEffect(() => {
     navigation.setOptions({
@@ -92,7 +93,43 @@ const CadastroDados2 = () => {
                 keyboardType="numeric"
                 mask="11111-111"
                 maxLength={9}
-              /> 
+              />
+
+              <TittleInput label="Endereço" />
+              <MyTextInput
+                value={endereco}
+                onChangeText={setEndereco}
+                icon="person"
+              />
+
+              <TittleInput label="Número" />
+              <MyTextInput
+                value={numero}
+                onChangeText={setNumero}
+                icon="person"
+                keyboardType="numeric"
+              />
+
+              <TittleInput label="Bairro" />
+              <MyTextInput
+                value={bairro}
+                onChangeText={setBairro}
+                icon="person"
+              />
+
+              <TittleInput label="Complemento" />
+              <MyTextInput
+                value={complemento}
+                onChangeText={setComplemento}
+                icon="person"
+              />
+
+              <TittleInput label="Cidade" />
+              <MyTextInput
+                value={cidade}
+                onChangeText={setCidade}
+                icon="person"
+              />
 
               <View
                 style={{ flexDirection: "row", justifyContent: "flex-end" }}
@@ -142,47 +179,6 @@ const CadastroDados2 = () => {
 };
 
 const styles = StyleSheet.create({
-  datePickerModal: {
-    gap: 12,
-    position: "absolute",
-    bottom: -20,
-    left: 0,
-    right: 0,
-    backgroundColor: "#fff",
-    padding: 20,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    elevation: 5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    zIndex: 30,
-    paddingBottom: 50,
-  },
-  confirmButton: {
-    backgroundColor: "#83239F",
-    padding: 0,
-    borderRadius: 5,
-    padding: 10,
-    alignItems: "center",
-    marginTop: 10,
-    paddingBottom: 10,
-  },
-  buttonTextGender: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-    margin: 5,
-  },
-  modalOverlay: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 15,
-  },
   buttonText: {
     fontSize: 18,
     color: "#fff",
