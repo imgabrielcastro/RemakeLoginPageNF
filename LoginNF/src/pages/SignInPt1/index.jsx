@@ -23,7 +23,7 @@ import GenderPicker from "../../components/SelectGender";
 import PhoneInput from "../../components/PhoneInput";
 import TittleInput from "../../components/TittleInput";
 import CpfInput from "../../components/CpfInput";
-import StepIndicator from "../../components/Stacks/StepIndicator";
+import StepIndicator from "../../components/StepIndicator";
 
 const CadastroDados = () => {
   const navigation = useNavigation();
@@ -43,6 +43,11 @@ const CadastroDados = () => {
   const handleBackPress = () => {
     navigation.goBack();
   };
+
+
+  const handleNextPress = () => {
+    navigation.navigate("SignIn2");
+  }
 
   useEffect(() => {
     navigation.setOptions({
@@ -156,11 +161,14 @@ const CadastroDados = () => {
               scrollEnabled={!modalIsOpen}
               showsVerticalScrollIndicator={true}
             >
-              <Text variant="headlineMedium" style={styles.title}>
+              <Text
+                variant="headlineMedium"
+                style={{ color: "#000", marginBottom: 20, fontSize: 22 }}
+              >
                 Preencha os dados para criar a sua conta.
               </Text>
 
-              <TittleInput label="Nome completo" />
+              <TittleInput label="Nome completo *" />
               <MyTextInput
                 value={name}
                 onChangeText={setName}
@@ -169,7 +177,7 @@ const CadastroDados = () => {
                 editable={!modalIsOpen}
               />
 
-              <TittleInput label="Data de Nascimento" />
+              <TittleInput label="Data de Nascimento *" />
               <TouchableOpacity onPress={showDatepicker} disabled={modalIsOpen}>
                 <DataPickerButton
                   value={dataNascimento}
@@ -179,7 +187,7 @@ const CadastroDados = () => {
                 />
               </TouchableOpacity>
 
-              <TittleInput label="Sexo" />
+              <TittleInput label="Sexo *" />
               <TouchableOpacity onPress={showSexpicker} disabled={modalIsOpen}>
                 <GenderPicker
                   value={gender}
@@ -197,7 +205,7 @@ const CadastroDados = () => {
                 editable={!modalIsOpen}
               />
 
-              <TittleInput label="Telefone" />
+              <TittleInput label="Telefone *" />
               <PhoneInput
                 value={phone}
                 onChangeText={setPhone}
@@ -208,7 +216,7 @@ const CadastroDados = () => {
                 maxLength={15}
               />
 
-              <TittleInput label="CPF" />
+              <TittleInput label="CPF *" />
               <CpfInput
                 value={cpf}
                 onChangeText={setCpf}
@@ -218,10 +226,12 @@ const CadastroDados = () => {
                 editable={!modalIsOpen}
                 maxLength={14}
               />
-              
-              <StepIndicator currentStep={1} totalSteps={3}/>
 
-
+              <View
+                style={{ flexDirection: "row", justifyContent: "flex-end" }}
+              >
+                <StepIndicator currentStep={1} totalSteps={3} />
+              </View>
             </ScrollView>
             <VStack style={{ padding: 16, paddingBottom: 32, gap: 12 }}>
               <TouchableOpacity
@@ -232,6 +242,7 @@ const CadastroDados = () => {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
+                onPress={handleNextPress}
                 // onPress={handleSubmit}
               >
                 <Text style={styles.buttonText}>Próximo</Text>
@@ -312,11 +323,13 @@ const CadastroDados = () => {
                   <Text style={styles.buttonTextGender}>Masculino</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={{backgroundColor: "#83239F",
-                  borderRadius: 12,
-                  paddingVertical: 16,
-                  alignItems: "center",
-                  justifyContent: "center",}}
+                  style={{
+                    backgroundColor: "#83239F",
+                    borderRadius: 12,
+                    paddingVertical: 16,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                   onPress={setSexFem}
                 >
                   <Text style={styles.buttonTextGender}>Feminino</Text>
@@ -331,17 +344,6 @@ const CadastroDados = () => {
 };
 
 const styles = StyleSheet.create({
-  title: {
-    color: "#000",
-    marginBottom: 20,
-    fontSize: 22,
-  },
-  backButton: {
-    left: 10,
-    zIndex: 1,
-    position: "absolute",
-    top: 10,
-  },
   datePickerModal: {
     gap: 12,
     position: "absolute",

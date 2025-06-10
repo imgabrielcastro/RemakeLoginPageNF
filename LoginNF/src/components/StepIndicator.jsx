@@ -5,7 +5,7 @@ const StepIndicator = ({ currentStep, totalSteps }) => {
   const text = `ETAPA ${currentStep} DE ${totalSteps}`;
 
   return (
-    <View style={{ gap: 4 }}>
+    <View style={{ gap: 4, salignSelf: 'flex-end'}}>
       <Text style={{ fontSize: 12, color: '#212121' }}>{text}</Text>
       <View style={{ flexDirection: 'row', gap: 8 }}>
         {Array.from({ length: totalSteps }).map((_, index) => {
@@ -18,6 +18,7 @@ const StepIndicator = ({ currentStep, totalSteps }) => {
                 width: 24,
                 height: 4,
                 borderRadius: 2,
+                
               }}
             />
           );
