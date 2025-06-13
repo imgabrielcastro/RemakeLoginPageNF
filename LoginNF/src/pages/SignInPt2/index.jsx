@@ -39,7 +39,7 @@ const CadastroDados2 = () => {
   useEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerTitle: "Endereço",
+      headerTitle: "Cadastro",
       headerStyle: {
         backgroundColor: "#83239F",
       },
@@ -71,9 +71,13 @@ const CadastroDados2 = () => {
               keyboardShouldPersistTaps="handled"
               showsVerticalScrollIndicator={true}
             >
+              <Text variant="headlineLarge" style={{fontWeight: 'bold', color: '#83239F', textAlign:"center"}}>
+                Endereço
+              </Text>
+
               <Text
                 variant="headlineMedium"
-                style={{ color: "#000", marginBottom: 20, fontSize: 22 }}
+                style={{ color: "#000", marginBottom: 20, fontSize: 20, textAlign:'center'}}
               >
                 Preencha os dados do seu do endereço.
               </Text>
