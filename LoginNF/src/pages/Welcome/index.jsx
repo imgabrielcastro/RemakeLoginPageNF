@@ -28,7 +28,8 @@ export default function Welcome() {
     if (user) {
       console.log("Teste");
     } else {
-      navigation.navigate("SignIn");
+      navigation.navigate("SignIn", {cpf: inputValue});
+
     }
   };
 

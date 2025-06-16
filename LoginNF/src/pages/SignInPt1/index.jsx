@@ -12,7 +12,7 @@ import {
   StatusBar,
 } from "react-native";
 import { Text } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import MyTextInput from "../../components/InputTemplate";
 import VStack from "../../components/Stacks/VStack";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -26,9 +26,11 @@ import CpfInput from "../../components/CpfInput";
 import StepIndicator from "../../components/StepIndicator";
 
 const CadastroDados = () => {
+  const route = useRoute();
+
   const navigation = useNavigation();
   const [name, setName] = useState("");
-  const [cpf, setCpf] = useState("");
+  const [cpf, setCpf] = useState(route.params?.cpf || '');
   const [dataNascimento, setDataNascimento] = useState("");
   const [phone, setPhone] = useState("");
   const [sex, setSex] = useState(false);
@@ -43,6 +45,8 @@ const CadastroDados = () => {
   const handleBackPress = () => {
     navigation.goBack();
   };
+
+
 
   const handleNextPress = () =>{
 
