@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import Welcome from "../pages/Welcome";
 import SignIn from "../pages/SignInPt1";

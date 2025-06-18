@@ -50,11 +50,11 @@ const CadastroDados = () => {
 
   const handleNextPress = () =>{
 
-    if (name.trim() === "" || email.trim() === "" || cpf.trim() ==="" || dataNascimento.trim() ===""|| gender.trim()==="" || phone.trim()==="" ){
-    Alert.alert("Preencha todos os dados obrigatórios!");
-    console.log("Ta pegando")
-    return;
-    }
+    // if (name.trim() === "" || email.trim() === "" || cpf.trim() ==="" || dataNascimento.trim() ===""|| gender.trim()==="" || phone.trim()==="" ){
+    // Alert.alert("Preencha todos os dados obrigatórios!");
+    // console.log("Ta pegando")
+    // return;
+    // }
     navigation.navigate("SignIn2");
   };
 

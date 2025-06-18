@@ -18,6 +18,8 @@ import * as Animatable from "react-native-animatable";
 import TittleInput from "../../components/TittleInput";
 import StepIndicator from "../../components/StepIndicator";
 import CepInput from "../../components/CepInput";
+import CitySelector from "../../components/ModalCity";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const CadastroDados2 = () => {
   const navigation = useNavigation();
@@ -29,12 +31,16 @@ const CadastroDados2 = () => {
     navigation.goBack();
   };
 
+  const handleCitySelect = (city) => {
+    console.log("Cidade selecionada:", city);
+  };
+
   const [cep, setCep] = useState("");
   const [endereco, setEndereco] = useState("");
   const [numero, setNumero] = useState("");
   const [bairro, setBairro] = useState("");
   const [complemento, setComplemento] = useState("");
-  const [cidade, setCidade] = useState("");
+  const [selectedCity, setSelectedCity] = React.useState(null);
 
   useEffect(() => {
     navigation.setOptions({
@@ -71,13 +77,25 @@ const CadastroDados2 = () => {
               keyboardShouldPersistTaps="handled"
               showsVerticalScrollIndicator={true}
             >
-              <Text variant="headlineLarge" style={{fontWeight: 'bold', color: '#83239F', textAlign:"center"}}>
+              <Text
+                variant="headlineLarge"
+                style={{
+                  fontWeight: "bold",
+                  color: "#83239F",
+                  textAlign: "center",
+                }}
+              >
                 Endereço
               </Text>
 
               <Text
                 variant="headlineMedium"
-                style={{ color: "#000", marginBottom: 20, fontSize: 20, textAlign:'center'}}
+                style={{
+                  color: "#000",
+                  marginBottom: 20,
+                  fontSize: 20,
+                  textAlign: "center",
+                }}
               >
                 Preencha os dados do seu do endereço.
               </Text>
@@ -100,43 +118,33 @@ const CadastroDados2 = () => {
               />
 
               <TittleInput label="Endereço" />
-              <MyTextInput
-                value={endereco}
-                onChangeText={setEndereco}
-                
-              />
+              <MyTextInput value={endereco} onChangeText={setEndereco} />
 
               <TittleInput label="Número" />
               <MyTextInput
                 value={numero}
                 onChangeText={setNumero}
-                
                 keyboardType="numeric"
               />
 
               <TittleInput label="Bairro" />
-              <MyTextInput
-                value={bairro}
-                onChangeText={setBairro}
-                
-              />
+              <MyTextInput value={bairro} onChangeText={setBairro} />
 
               <TittleInput label="Complemento" />
-              <MyTextInput
-                value={complemento}
-                onChangeText={setComplemento}
-                
-              />
+              <MyTextInput value={complemento} onChangeText={setComplemento} />
 
               <TittleInput label="Cidade" />
-              <MyTextInput
-                value={cidade}
-                onChangeText={setCidade}
-                
-              />
+              <GestureHandlerRootView style={{ flex: 1 }}>
+                <View>
+                  <CitySelector
+                    selectedCity={selectedCity}
+                    onSelectCity={(city) => setSelectedCity(city)}
+                  />
+                </View>
+              </GestureHandlerRootView>
             </ScrollView>
             <VStack style={{ padding: 16, paddingBottom: "15%", gap: 12 }}>
-              <StepIndicator currentStep={2} totalSteps={3}/>
+              <StepIndicator currentStep={2} totalSteps={3} />
               <TouchableOpacity
                 style={{
                   backgroundColor: "#83239F",
@@ -144,7 +152,6 @@ const CadastroDados2 = () => {
                   paddingVertical: 16,
                   alignItems: "center",
                   justifyContent: "center",
-                  
                 }}
                 onPress={handleNextPress}
               >
@@ -152,7 +159,7 @@ const CadastroDados2 = () => {
               </TouchableOpacity>
               {/* <TouchableOpacity
                 style={{
-                  backgroundColor: "transparent",
+                  backgroundColor: "transparent",r
                   color: "#83239F",
                   borderWidth: 2,
                   borderColor: "#83239F",
