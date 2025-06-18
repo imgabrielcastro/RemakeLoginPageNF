@@ -12,9 +12,7 @@ import { Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import MyTextInput from "../../components/InputTemplate";
 import VStack from "../../components/Stacks/VStack";
-import HStack from "../../components/Stacks/HStack";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import * as Animatable from "react-native-animatable";
 import TittleInput from "../../components/TittleInput";
 import StepIndicator from "../../components/StepIndicator";
 import CepInput from "../../components/CepInput";
@@ -25,14 +23,10 @@ const CadastroDados2 = () => {
   const navigation = useNavigation();
 
   const handleNextPress = () => {
-    navigation.navigate("SignIn2");
+    navigation.navigate("SignIn3");
   };
   const handleBackPress = () => {
     navigation.goBack();
-  };
-
-  const handleCitySelect = (city) => {
-    console.log("Cidade selecionada:", city);
   };
 
   const [cep, setCep] = useState("");
