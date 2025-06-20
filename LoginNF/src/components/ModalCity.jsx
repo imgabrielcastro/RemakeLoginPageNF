@@ -94,10 +94,8 @@ const CitySelector = ({ selectedCity, onSelectCity }) => {
   backdropOpacity={0.6}
 >
   <View style={[styles.modalContent, { height: height * 0.9 }]}>
-    {/* Handle */}
     <View style={styles.modalHandle} />
     
-    {/* Cabeçalho */}
     <View style={styles.modalHeader}>
       <Text style={styles.modalTitle}>Encontre sua cidade</Text>
       <TouchableOpacity 
@@ -108,7 +106,6 @@ const CitySelector = ({ selectedCity, onSelectCity }) => {
       </TouchableOpacity>
     </View>
 
-    {/* Campo de busca */}
     <View style={styles.searchContainer}>
       <TextInput
         style={styles.searchInput}
@@ -403,3 +400,4 @@ emptyText: {
 });
 
 export default CitySelector;
+
