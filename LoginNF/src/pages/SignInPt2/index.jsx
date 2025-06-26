@@ -23,8 +23,6 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 const CadastroDados2 = () => {
   const navigation = useNavigation();
 
-
-
   const handleNextPress = () => {
     navigation.navigate("SignIn3");
   };
@@ -41,36 +39,33 @@ const CadastroDados2 = () => {
 
   async function searchCep(cepValue) {
     try {
-      const cleanedCep = cepValue.replace(/\D/g, '');
+      const cleanedCep = cepValue.replace(/\D/g, "");
       if (cleanedCep.length !== 8) return;
-  
+
       const response = await api.get(`${cleanedCep}/json/`);
       const data = response.data;
-  
+
       if (!data || data.erro) {
-        throw new Error('CEP não encontrado ou inválido');
+        throw new Error("CEP não encontrado ou inválido");
       }
-  
-      // Atualiza os estados
-      setEndereco(data.logradouro || '');
-      setBairro(data.bairro || '');
-      
-      // Formata o objeto de cidade no formato esperado pelo ModalCity
+
+      setEndereco(data.logradouro || "");
+      setBairro(data.bairro || "");
+
+
       if (data.localidade) {
         const cidadeFormatada = {
-          id: Math.random().toString(36).substr(2, 9), // ID temporário
+          id: Math.random().toString(36).substr(2, 9), 
           name: data.localidade,
           cidade: data.localidade,
-          estado: data.uf || '',
-          ufId: null // Não temos essa informação da ViaCEP
+          estado: data.uf || "",
+          ufId: null, 
         };
         setSelectedCity(cidadeFormatada);
       }
-  
     } catch (error) {
-      console.error('Erro:', error);
-      setEndereco('(CEP não encontrado)');
-      setBairro('');
+      setEndereco("");
+      setBairro("");
       setSelectedCity(null);
     }
   }
@@ -91,7 +86,7 @@ const CadastroDados2 = () => {
         <TouchableOpacity onPress={handleBackPress} style={{ marginBottom: 4 }}>
           <Icon name="chevron-left" size={32} color="white" />
         </TouchableOpacity>
-      ),
+      ), 
     });
   }, [navigation]);
 
@@ -145,7 +140,6 @@ const CadastroDados2 = () => {
               <CepInput
                 value={cep}
                 onChangeText={(cepValue) => {
-                  console.log('CEP digitado no input:', cepValue);
                   setCep(cepValue);
                   searchCep(cepValue);
                 }}
