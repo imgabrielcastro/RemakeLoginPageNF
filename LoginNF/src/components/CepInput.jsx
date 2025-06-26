@@ -10,14 +10,18 @@ export default function CepInput({
   error,
   icon,
   maxLength,
-}) {
+}) 
+
+{
   return (
     <View style={styles.inputContainer}>
       <TextInputMask
         type="custom"
         options={{ mask: "99999-999" }}
         value={value}
-        onChangeText={onChangeText}
+        onChangeText={(text) => {
+          onChangeText(text);
+        }}
         style={styles.input}
         keyboardType={keyboardType}
         maxLength={maxLength}

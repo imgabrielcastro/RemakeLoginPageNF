@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingRight: 40,
     height: 40,
-    fontSize: 18,
+    fontSize: 14,
     borderolor: '#d8d8d8'
   },
   iconStyle: {

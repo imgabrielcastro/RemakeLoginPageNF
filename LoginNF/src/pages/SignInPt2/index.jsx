@@ -17,10 +17,13 @@ import TittleInput from "../../components/TittleInput";
 import StepIndicator from "../../components/StepIndicator";
 import CepInput from "../../components/CepInput";
 import CitySelector from "../../components/ModalCity";
+import api from "../../services/api";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const CadastroDados2 = () => {
   const navigation = useNavigation();
+
+
 
   const handleNextPress = () => {
     navigation.navigate("SignIn3");
@@ -35,6 +38,42 @@ const CadastroDados2 = () => {
   const [bairro, setBairro] = useState("");
   const [complemento, setComplemento] = useState("");
   const [selectedCity, setSelectedCity] = React.useState(null);
+
+  async function searchCep(cepValue) {
+    try {
+      const cleanedCep = cepValue.replace(/\D/g, '');
+      if (cleanedCep.length !== 8) return;
+  
+      const response = await api.get(`${cleanedCep}/json/`);
+      const data = response.data;
+  
+      if (!data || data.erro) {
+        throw new Error('CEP não encontrado ou inválido');
+      }
+  
+      // Atualiza os estados
+      setEndereco(data.logradouro || '');
+      setBairro(data.bairro || '');
+      
+      // Formata o objeto de cidade no formato esperado pelo ModalCity
+      if (data.localidade) {
+        const cidadeFormatada = {
+          id: Math.random().toString(36).substr(2, 9), // ID temporário
+          name: data.localidade,
+          cidade: data.localidade,
+          estado: data.uf || '',
+          ufId: null // Não temos essa informação da ViaCEP
+        };
+        setSelectedCity(cidadeFormatada);
+      }
+  
+    } catch (error) {
+      console.error('Erro:', error);
+      setEndereco('(CEP não encontrado)');
+      setBairro('');
+      setSelectedCity(null);
+    }
+  }
 
   useEffect(() => {
     navigation.setOptions({
@@ -105,7 +144,11 @@ const CadastroDados2 = () => {
               <TittleInput label="CEP *" />
               <CepInput
                 value={cep}
-                onChangeText={setCep}
+                onChangeText={(cepValue) => {
+                  console.log('CEP digitado no input:', cepValue);
+                  setCep(cepValue);
+                  searchCep(cepValue);
+                }}
                 keyboardType="numeric"
                 mask="11111-111"
                 maxLength={9}
