@@ -106,7 +106,7 @@ const CadastroDados2 = () => {
               showsVerticalScrollIndicator={true}
             >
               <Text
-                variant="headlineLarge"
+                variant="headlineMedium"
                 style={{
                   fontWeight: "bold",
                   color: "#83239F",

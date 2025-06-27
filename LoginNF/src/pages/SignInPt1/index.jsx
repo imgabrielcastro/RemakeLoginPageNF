@@ -30,7 +30,7 @@ const CadastroDados = () => {
 
   const navigation = useNavigation();
   const [name, setName] = useState("");
-  const [cpf, setCpf] = useState(route.params?.cpf || '');
+  const [cpf, setCpf] = useState(route.params?.cpf || "");
   const [dataNascimento, setDataNascimento] = useState("");
   const [phone, setPhone] = useState("");
   const [sex, setSex] = useState(false);
@@ -46,10 +46,7 @@ const CadastroDados = () => {
     navigation.goBack();
   };
 
-
-
-  const handleNextPress = () =>{
-
+  const handleNextPress = () => {
     // if (name.trim() === "" || email.trim() === "" || cpf.trim() ==="" || dataNascimento.trim() ===""|| gender.trim()==="" || phone.trim()==="" ){
     // Alert.alert("Preencha todos os dados obrigatórios!");
     // console.log("Ta pegando")
@@ -170,12 +167,26 @@ const CadastroDados = () => {
               scrollEnabled={!modalIsOpen}
               showsVerticalScrollIndicator={true}
             >
-              <Text variant="headlineLarge" style={{fontWeight: 'bold', color: '#83239F', textAlign:"center"}}>
+              <Text
+                variant="headlineMedium"
+                style={{
+                  fontWeight: "bold",
+                  color: "#83239F",
+                  textAlign: "center",
+                }}
+              >
                 Dados Pessoais
               </Text>
 
-
-              <Text variant="headlineMedium" style={styles.title}>
+              <Text
+                variant="headlineMedium"
+                style={{
+                  color: "#000",
+                  marginBottom: 20,
+                  fontSize: 20,
+                  textAlign: "center",
+                }}
+              >
                 Preencha seus dados pessoais.
               </Text>
 
@@ -188,7 +199,7 @@ const CadastroDados = () => {
                 editable={!modalIsOpen}
               />
 
-              <TittleInput label="Data de Nascimento" />
+              <TittleInput label="Data de nascimento" />
               <TouchableOpacity onPress={showDatepicker} disabled={modalIsOpen}>
                 <DataPickerButton
                   value={dataNascimento}
@@ -237,11 +248,9 @@ const CadastroDados = () => {
                 editable={!modalIsOpen}
                 maxLength={14}
               />
-              
-
             </ScrollView>
             <VStack style={{ padding: 16, paddingBottom: "15%", gap: 12 }}>
-              <StepIndicator currentStep={1} totalSteps={3}/>
+              <StepIndicator currentStep={1} totalSteps={3} />
               <TouchableOpacity
                 style={{
                   backgroundColor: "#83239F",
@@ -249,7 +258,6 @@ const CadastroDados = () => {
                   paddingVertical: 16,
                   alignItems: "center",
                   justifyContent: "center",
-                  
                 }}
                 onPress={handleNextPress}
               >
@@ -331,11 +339,13 @@ const CadastroDados = () => {
                   <Text style={styles.buttonTextGender}>Masculino</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={{backgroundColor: "#83239F",
-                  borderRadius: 12,
-                  paddingVertical: 16,
-                  alignItems: "center",
-                  justifyContent: "center",}}
+                  style={{
+                    backgroundColor: "#83239F",
+                    borderRadius: 12,
+                    paddingVertical: 16,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                   onPress={setSexFem}
                 >
                   <Text style={styles.buttonTextGender}>Feminino</Text>
@@ -354,7 +364,7 @@ const styles = StyleSheet.create({
     color: "#000",
     marginBottom: 20,
     fontSize: 22,
-    textAlign: 'center'
+    textAlign: "center",
   },
   backButton: {
     left: 10,

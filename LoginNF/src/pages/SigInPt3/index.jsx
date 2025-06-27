@@ -15,23 +15,25 @@ import VStack from "../../components/Stacks/VStack";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import TittleInput from "../../components/TittleInput";
 import StepIndicator from "../../components/StepIndicator";
-import CepInput from "../../components/CepInput";
-import CitySelector from "../../components/ModalCity";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-const CadastroDados3 =() => {
-const navigation = useNavigation();
+const CadastroDados3 = () => {
+  const navigation = useNavigation();
 
-const [senha, setSenha] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-const handleBackPress = () => {
-  navigation.goBack();
-};
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
 
-useEffect(() => {
+  const handleNextPress = () => {
+    navigation.navigate("SignIn3");
+  };
+  useEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerTitle: "Senha",
+      headerTitle: "Cadastro",
       headerStyle: {
         backgroundColor: "#83239F",
       },
@@ -44,37 +46,93 @@ useEffect(() => {
         <TouchableOpacity onPress={handleBackPress} style={{ marginBottom: 4 }}>
           <Icon name="chevron-left" size={32} color="white" />
         </TouchableOpacity>
-      ), 
+      ),
     });
   }, [navigation]);
 
-return(
+  return (
+    <>
     <KeyboardAvoidingView
-            style={{ backgroundColor: "#fafafa", flex: 1 }}
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ backgroundColor: "#fafafa", flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <View style={{ flex: 1, position: "relative" }}>
+      <VStack style={{ flex: 1 }}>
+        <ScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={{ padding: 16, paddingBottom: 100 }}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={true}
+        >
+          <Text
+            variant="headlineMedium"
+            style={{
+              fontWeight: "bold",
+              color: "#83239F",
+              textAlign: "center",
+            }}
           >
-        <VStack style={{ flex: 1 }}>
-            <ScrollView
-              style={{ flex: 1 }}
-              contentContainerStyle={{ padding: 16, paddingBottom: 100 }}
-              keyboardShouldPersistTaps="handled"
-              showsVerticalScrollIndicator={true}
-            >
-        <TittleInput label="Informe sua senha:"/>
-        <MyTextInput
-            value={senha}
-            onChangeText={setSenha}
+            Senha
+          </Text>
+
+          <Text
+            variant="headlineMedium"
+            style={{
+              color: "#000",
+              marginBottom: 20,
+              fontSize: 20,
+              textAlign: "center",
+            }}
+          >
+            Falta pouco para finalizar seu cadastro. Vamos criar a sua senha?
+          </Text>
+
+          <TittleInput label="Senha:" />
+          <MyTextInput
+            value={password}
+            onChangeText={setPassword}
             secureTextEntry
             icon="lock"
             maxLength={16}
-        />
-    </ScrollView>
-    </VStack>
+          />
+
+          <TittleInput label="Confirme sua senha:" />
+          <MyTextInput
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry
+            icon="lock"
+            maxLength={16}
+          />
+        </ScrollView>
+        <VStack style={{ padding: 16, paddingBottom: "15%", gap: 12 }}>
+        <StepIndicator currentStep={3} totalSteps={3} />
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#83239F",
+            borderRadius: 12,
+            paddingVertical: 16,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onPress={handleNextPress}
+        >
+          <Text style={styles.buttonText}>Próximo</Text>
+        </TouchableOpacity>
+      </VStack>
+      </VStack>
+      </View>
     </KeyboardAvoidingView>
-)
+    </>
+  );
+};
 
-}
-
-
+const styles = StyleSheet.create({
+  buttonText: {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "bold",
+  },
+});
 
 export default CadastroDados3;
