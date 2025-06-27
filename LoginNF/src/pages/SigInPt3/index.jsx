@@ -52,77 +52,88 @@ const CadastroDados3 = () => {
 
   return (
     <>
-    <KeyboardAvoidingView
-      style={{ backgroundColor: "#fafafa", flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <View style={{ flex: 1, position: "relative" }}>
-      <VStack style={{ flex: 1 }}>
-        <ScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={{ padding: 16, paddingBottom: 100 }}
-          keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={true}
-        >
-          <Text
-            variant="headlineMedium"
-            style={{
-              fontWeight: "bold",
-              color: "#83239F",
-              textAlign: "center",
-            }}
-          >
-            Senha
-          </Text>
+      <KeyboardAvoidingView
+        style={{ backgroundColor: "#fafafa", flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <View style={{ flex: 1, position: "relative" }}>
+          <VStack style={{ flex: 1 }}>
+            <ScrollView
+              style={{ flex: 1 }}
+              contentContainerStyle={{ padding: 16, paddingBottom: 100 }}
+              keyboardShouldPersistTaps="handled"
+              showsVerticalScrollIndicator={true}
+            >
+              <Text
+                variant="headlineMedium"
+                style={{
+                  fontWeight: "bold",
+                  color: "#83239F",
+                  textAlign: "center",
+                }}
+              >
+                Senha
+              </Text>
 
-          <Text
-            variant="headlineMedium"
-            style={{
-              color: "#000",
-              marginBottom: 20,
-              fontSize: 20,
-              textAlign: "center",
-            }}
-          >
-            Falta pouco para finalizar seu cadastro. Vamos criar a sua senha?
-          </Text>
+              <Text
+                variant="headlineMedium"
+                style={{
+                  color: "#000",
+                  fontSize: 20,
+                  textAlign: "center",
+                }}
+              >
+                Vamos criar a sua senha?
+              </Text>
 
-          <TittleInput label="Senha:" />
-          <MyTextInput
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            icon="lock"
-            maxLength={16}
-          />
+              <Text
+                variant="headlineSmall"
+                style={{
+                  color: "#000",
+                  fontSize: 16,
+                  marginBottom: 20,
+                  textAlign: "center",
+                }}
+              >
+                Falta pouco para finalizar seu cadastro. 
+              </Text>
 
-          <TittleInput label="Confirme sua senha:" />
-          <MyTextInput
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            secureTextEntry
-            icon="lock"
-            maxLength={16}
-          />
-        </ScrollView>
-        <VStack style={{ padding: 16, paddingBottom: "15%", gap: 12 }}>
-        <StepIndicator currentStep={3} totalSteps={3} />
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#83239F",
-            borderRadius: 12,
-            paddingVertical: 16,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onPress={handleNextPress}
-        >
-          <Text style={styles.buttonText}>Próximo</Text>
-        </TouchableOpacity>
-      </VStack>
-      </VStack>
-      </View>
-    </KeyboardAvoidingView>
+              <TittleInput label="Senha:" />
+              <MyTextInput
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+                icon="lock"
+                maxLength={16}
+              />
+
+              <TittleInput label="Confirme sua senha:" />
+              <MyTextInput
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                secureTextEntry
+                icon="lock"
+                maxLength={16}
+              />
+            </ScrollView>
+            <VStack style={{ padding: 16, paddingBottom: "15%", gap: 12 }}>
+              <StepIndicator currentStep={3} totalSteps={3} />
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#83239F",
+                  borderRadius: 12,
+                  paddingVertical: 16,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                onPress={handleNextPress}
+              >
+                <Text style={styles.buttonText}>Próximo</Text>
+              </TouchableOpacity>
+            </VStack>
+          </VStack>
+        </View>
+      </KeyboardAvoidingView>
     </>
   );
 };
